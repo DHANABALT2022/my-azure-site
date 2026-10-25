@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Azure Website</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Hello from Azure App Service ☁️</h1>
+    <p class="subtitle">Deployed automatically from GitHub</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>How this site works</h2>
+      <ol>
+        <li>The code lives in a <strong>GitHub repository</strong>.</li>
+        <li>Every push to <code>main</code> starts a <strong>GitHub Actions</strong> workflow.</li>
+        <li>The workflow deploys the code to <strong>Azure App Service</strong>.</li>
+        <li>Azure serves the site at <code>*.azurewebsites.net</code>.</li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h2>Test the deployment</h2>
+      <p>Change this text in GitHub, commit, and refresh this page in a couple of minutes.</p>
+      <p class="version">Version: <strong>1.0</strong></p>
+      <p>Server time: <span id="time">loading…</span></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Built with Node.js + Express on Azure App Service</p>
+  </footer>
+
+  <script>
+    fetch("/health")
+      .then(r => r.json())
+      .then(d => { document.getElementById("time").textContent = d.time; })
+      .catch(() => { document.getElementById("time").textContent = "unavailable"; });
+  </script>
+</body>
+</html>
